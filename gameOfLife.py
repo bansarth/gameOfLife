@@ -16,8 +16,8 @@ def createState(width, height, type):
         for i in range(height):
             line = []
             for j in range(width):
-                randomNum = random.random
-                if(randomNum > .5):
+                randomNum = random.random()
+                if(randomNum >= .5):
                     line.append(ALIVE);
                 else:
                     line.append(DEAD);
@@ -26,8 +26,8 @@ def createState(width, height, type):
         for i in range(height):
             line = []
             for j in range(width):
-                randomNum = random.random
-                if(randomNum > .9):
+                randomNum = random.random()
+                if(randomNum >= .9):
                     line.append(ALIVE);
                 else:
                     line.append(DEAD);
@@ -36,8 +36,17 @@ def createState(width, height, type):
 def printState():
     for i in range(len(state)):
         for j in range(len(state[i])):
-            print(state[i][j] + " ")
+            print(state[i][j], " ", end="")
         print("\n")
 
-createState(10, 10, "DEAD")
-printState()
+def pprintState():
+    for i in range(len(state)):
+        for j in range(len(state[i])):
+            if(state[i][j] == DEAD):
+                print(" ", end="")
+            else:
+                print(u"\u2588", end="");
+        print("\n")
+
+createState(150, 20, "50/50")
+pprintState()
