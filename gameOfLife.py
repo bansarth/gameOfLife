@@ -48,5 +48,5 @@ def pprintState():
                 print(u"\u2588", end="");
         print("\n")
 
-createState(150, 20, "RANDOM")
+createState(150, 20, "DEAD")
 pprintState()
