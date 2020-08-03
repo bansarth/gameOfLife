@@ -1,11 +1,17 @@
 import random
+import time
 
-DEAD = 0;
-ALIVE = 1;
+wState = 0
+hState = 0
+DEAD = 0
+ALIVE = 1
 
-state = [];
+state = []
+nextState = []
 
 def createState(width, height, type):
+    wState = width
+    hState = height
     if(type == "DEAD"):
         for i in range(height):
             line = []
@@ -48,5 +54,32 @@ def pprintState():
                 print(u"\u2588", end="");
         print("\n")
 
-createState(150, 20, "DEAD")
+def nextCellState(x, y):
+    alive = 0
+    for i in range((x-1), (x+1)):
+        if(i < 0 or i >= hState): continue
+        for j in range((y-1), (y+1)):
+            if(j < 0 or j >= wState): continue
+            elif(x == i and y == j): continue
+            if(state[i][j] == ALIVE): alive += 1
+
+    if(state[x][y] == ALIVE):
+        if(alive < 2): nextState[x][y] = DEAD
+        elif(alive > 3): nextState[x][y] = DEAD
+    elif(state[x][y] == DEAD):
+        if(alive == 3): nextState[x][y] = ALIVE
+
+def nextBoardState():
+    for i in range(0, wState):
+        for j in range(0, hState):
+            nextCellState(i, j)
+
+createState(150, 20, "RANDOM")
+nextState = state
 pprintState()
+
+while True:
+    nextBoardState()
+    state = nextState
+    pprintState()
+    time.sleep(1)
